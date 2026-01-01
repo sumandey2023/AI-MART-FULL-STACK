@@ -3,7 +3,7 @@ import {
   registerUserValidations,
   loginUserValidations,
   addUserAddressValidations,
-} from "../middlewares/validator.middleware.js";
+} from "../validator/validator.middleware.js";
 import authMiddleware from "../middlewares/auth.middleware.js";
 import {
   registerUser,

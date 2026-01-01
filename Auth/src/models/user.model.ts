@@ -1,13 +1,6 @@
 import mongoose, { Schema, Document, Model } from "mongoose";
-
-export interface IAddress {
-  street?: string;
-  city?: string;
-  state?: string;
-  zip?: string;
-  country?: string;
-  isDefault?: boolean;
-}
+import type { IUser, IAddress } from "../types/auth.types.js";
+export interface UserDocument extends IUser, Document {}
 
 const addressSchema = new Schema<IAddress>({
   street: String,
@@ -18,20 +11,7 @@ const addressSchema = new Schema<IAddress>({
   isDefault: { type: Boolean, default: false },
 });
 
-export interface IUser extends Document {
-  username: string;
-  email: string;
-  password?: string;
-  fullName: {
-    firstName: string;
-    lastName: string;
-  };
-  role: "user" | "seller";
-  profilePic?: string;
-  addresses: IAddress[];
-}
-
-const userSchema = new Schema<IUser>(
+const userSchema = new Schema<UserDocument>(
   {
     username: {
       type: String,
@@ -66,7 +46,9 @@ const userSchema = new Schema<IUser>(
   { timestamps: true }
 );
 
-const UserModel: Model<IUser> =
-  mongoose.models.User || mongoose.model<IUser>("User", userSchema);
+const UserModel: Model<UserDocument> = mongoose.model<UserDocument>(
+  "User",
+  userSchema
+);
 
 export default UserModel;

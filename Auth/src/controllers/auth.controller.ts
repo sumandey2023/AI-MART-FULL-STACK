@@ -1,41 +1,11 @@
 import type { Request, Response } from "express";
-import dotenv from "dotenv";
+import { ENV } from "../config/env.js";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
 import userModel from "../models/user.model.js";
-
-dotenv.config();
-
-const JWT_SECRET = process.env.JWT_SECRET;
-if (!JWT_SECRET) {
-  throw new Error("JWT_SECRET is not defined in environment variables");
-}
-
-interface RegisterUserBody {
-  username: string;
-  email: string;
-  password: string;
-  fullName: {
-    firstName: string;
-    lastName: string;
-  };
-  role?: "user" | "seller" | "admin";
-}
-
-interface LoginUserBody {
-  email?: string;
-  username?: string;
-  password: string;
-}
-
-interface AddressBody {
-  street: string;
-  city: string;
-  state: string;
-  zip: string;
-  country: string;
-  isDefault?: boolean;
-}
+import type { RegisterUserBody } from "../types/auth.dto.js";
+import type { LoginUserBody } from "../types/auth.dto.js";
+import type { AddressBody } from "../types/auth.dto.js";
 
 //Register Controller
 const registerUser = async (
@@ -76,7 +46,7 @@ const registerUser = async (
         email: user.email,
         role: user.role,
       },
-      JWT_SECRET,
+      ENV.JWT_SECRET,
       { expiresIn: "1d" }
     );
 
@@ -135,7 +105,7 @@ const loginUser = async (
         email: user.email,
         role: user.role,
       },
-      JWT_SECRET,
+      ENV.JWT_SECRET,
       { expiresIn: "1d" }
     );
 
