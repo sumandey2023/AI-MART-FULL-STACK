@@ -18,6 +18,8 @@ const createProduct = async (
 ): Promise<Response> => {
   try {
     const { title, description, price, category, currency } = req.body;
+    console.log(price);
+    
 
     const seller = req.user._id;
 

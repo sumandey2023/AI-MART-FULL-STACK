@@ -13,6 +13,14 @@ import upload from "../middlewares/upload.middleware.js";
 
 const router = express.Router();
 
+//GET /api/products/seller
+router.get(
+  "/seller",
+  createAuthMiddleware(["seller"]),
+  getProductsBySeller
+);
+
+
 //POST /api/products/
 router.post(
   "/",
@@ -32,12 +40,6 @@ router.get("/:id", getProductById);
 router.patch("/:id", createAuthMiddleware(["admin", "seller"]), updateProduct);
 
 
-//GET /api/products/seller
-router.get(
-  "/seller",
-  createAuthMiddleware(["seller"]),
-  getProductsBySeller
-);
 
 //DELETE /api/products/:id
 router.delete(

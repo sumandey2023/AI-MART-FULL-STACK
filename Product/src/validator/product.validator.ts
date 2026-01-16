@@ -31,7 +31,7 @@ const createProductValidator = [
     .isLength({ min: 10, max: 1000 })
     .withMessage("Description must be between 10 and 1000 characters"),
 
-  body("priceAmount")
+  body("price")
     .notEmpty()
     .withMessage("Price is required")
     .isFloat({ min: 0 })
@@ -42,7 +42,7 @@ const createProductValidator = [
     .isLength({ min: 2, max: 50 })
     .withMessage("Category must be between 2 and 50 characters"),
 
-  body("priceCurrency")
+  body("currency")
     .optional()
     .isIn(["INR", "USD"])
     .withMessage("Currency must be either INR or USD"),
