@@ -20,7 +20,7 @@ declare global {
 
     interface Request {
       user: User;
-      files?: Multer.File[]; // ✅ ADD THIS
+      files?: Multer.File[]; 
     }
   }
 }
