@@ -62,7 +62,7 @@ const addItemsToCart = async (
     }
 
     const existingItemIndex = cart.items.findIndex(
-      (item) => item.product.toString() === productId,
+      (item) => item.productId.toString() === productId,
     );
 
     if (existingItemIndex > -1) {
@@ -73,7 +73,7 @@ const addItemsToCart = async (
       }
     } else {
       cart.items.push({
-        product: new mongoose.Types.ObjectId(productId),
+        productId: new mongoose.Types.ObjectId(productId),
         quantity,
       });
     }
@@ -142,7 +142,7 @@ const updateItem = async (
     }
 
     const itemIndex = cart.items.findIndex(
-      (item) => item.product.toString() === itemId,
+      (item) => item.productId.toString() === itemId,
     );
 
     if (itemIndex < 0) {
@@ -193,7 +193,7 @@ const deleteItem = async (
     }
 
     const itemIndex = cart.items.findIndex(
-      (item) => item.product.toString() === itemId,
+      (item) => item.productId.toString() === itemId,
     );
 
     if (itemIndex < 0) {
